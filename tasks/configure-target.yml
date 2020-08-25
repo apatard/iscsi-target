@@ -10,7 +10,7 @@
   targetcli_backstore:
     backstore_type: "{{ disk.type | default(iscsi_default_disk_type) }}"
     backstore_name: "{{ disk.name }}"
-    options: " {{ iscsi_disk_path_prefix }}{{ disk.path }} "
+    options: " {{ iscsi_disk_path_prefix }}{{ disk.path }} {{ disk.size | default(omit) }}"
     state: "{{ target.state | default('present') }}"
   with_items:
     - "{{ target.disks }}"
